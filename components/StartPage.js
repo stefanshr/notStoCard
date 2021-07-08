@@ -5,37 +5,13 @@ import {FlatList} from "native-base";
 import Card from "./Card";
 
 
-const Startpage = () => {
 
-    const [cardItems, setCardItems] = useState([]);
+const Startpage = (props) => {
 
-    useEffect(() => {
-        setCardItems([
-            {
-                id: 0,
-                name: 'Migros'
-            },
-            {
-                id: 1,
-                name: 'Coop'
-            }, {
-                id: 2,
-                name: 'Brack'
-            },
-            {
-                id: 3,
-                name: 'TCS'
-            }, {
-                id: 4,
-                name: 'Digitec'
-            },
-            {
-                id: 5,
-                name: 'Whatsapp'
-            },
-        ])
-    }, [])
+    const cardItems = props.route.params.cardItems;
+    const setCardItems = props.route.params.setCardItems;
 
+    console.log(JSON.stringify(cardItems))
 
     return (
         <>
@@ -43,7 +19,7 @@ const Startpage = () => {
             <FlatList
                 data={cardItems}
                 numColumns={2}
-                renderItem={({item}) => (<Card item={item} cardItems={cardItems}/>)}
+                renderItem={({item}) => (<Card item={item} navigation={props.navigation} cardItems={cardItems}/>)}
                 keyExtractor={item => item.id}
             />
         </>
