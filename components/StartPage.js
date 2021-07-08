@@ -8,10 +8,15 @@ import Card from "./Card";
 
 const Startpage = (props) => {
 
+    useEffect(() => {
+        console.clear();
+        console.log(JSON.stringify(cardItems))
+    },[])
+
     const cardItems = props.route.params.cardItems;
     const setCardItems = props.route.params.setCardItems;
 
-    console.log(JSON.stringify(cardItems))
+
 
     return (
         <>

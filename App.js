@@ -13,25 +13,33 @@ export default function App() {
         setCardItems([
             {
                 id: 0,
-                name: 'Migros'
+                name: 'Migos',
+                barcode: ''
             },
             {
                 id: 1,
-                name: 'Coop'
-            }, {
+                name: 'Coop',
+                barcode: ''
+            },
+            {
                 id: 2,
-                name: 'Brack'
+                name: 'Brack',
+                barcode: ''
             },
             {
                 id: 3,
-                name: 'TCS'
-            }, {
+                name: 'TCS',
+                barcode: ''
+            },
+            {
                 id: 4,
-                name: 'Digitec'
+                name: 'Digitec',
+                barcode: ''
             },
             {
                 id: 5,
-                name: 'Whatsapp'
+                name: 'Whatsapp',
+                barcode: ''
             },
         ])
     }, [])

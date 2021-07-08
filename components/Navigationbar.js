@@ -37,7 +37,14 @@ export default function Navigationbar({cardItems, setCardItems}) {
                         }
                         }
             />
-            <Tab.Screen name="Create" component={CreatePage}  initialParams={{cardItems: cardItems, setCardItems: setCardItems}}
+            <Tab.Screen name="Create" component={() =>
+                <Stack.Navigator>
+                    <Stack.Screen name="Create" component={CreatePage} initialParams={{cardItems: cardItems, setCardItems: setCardItems}}
+                                  options={{
+                                      headerShown: false}
+                                  }/>
+                </Stack.Navigator>
+            }
                         options={{
                             tabBarIcon: ({color, size}) => (
                                 <MaterialIcons name="add-a-photo" size={size} color={color}/>

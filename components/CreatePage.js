@@ -1,32 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
-import { BarCodeScanner } from 'expo-barcode-scanner';
+import React, {useState, useEffect} from 'react';
+import {Text, View, StyleSheet, Button} from 'react-native';
+import {BarCodeScanner} from 'expo-barcode-scanner';
 
-export default function CreatePage(props) {
+const CreatePage = (props) => {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
-    const cardItems = props.route.params.cardItems;
-    const setCardItems = props.route.params.setCardItems;
-    console.log(JSON.stringify(cardItems))
+    // const [cardItems, setCardItems] = useState([]);
+
+
+
+    //
+    useEffect(() => {
+
+        console.log(JSON.stringify(props.route.params.cardItems))
+    }, [])
 
     useEffect(() => {
         (async () => {
-            const { status } = await BarCodeScanner.requestPermissionsAsync();
+            const {status} = await BarCodeScanner.requestPermissionsAsync();
             setHasPermission(status === 'granted');
         })();
     }, []);
 
-    const handleBarCodeScanned = ({ type, data }) => {
+    const handleBarCodeScanned = ({type, data}) => {
 
         setScanned(true);
         alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-        setCardItems([...cardItems], {
-            id: cardItems.length-1,
+
+        props.route.params.setCardItems([...props.route.params.cardItems, {
+            id: 99,
             name: 'woho',
             barcode: {data}
-        });
-
+        }]);
+        //
+        // setCardItems([...cardItems, {
+        //     id: 99,
+        //     name: 'woho',
+        //     barcode: {data}
+        // }]);
     };
+
+    // useEffect(() => {
+    //     console.log(JSON.stringify(cardItems))
+    // },[cardItems])
 
     if (hasPermission === null) {
         return <Text>Requesting for camera permission</Text>;
@@ -41,7 +57,7 @@ export default function CreatePage(props) {
                 onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                 style={StyleSheet.absoluteFillObject}
             />
-            {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+            {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)}/>}
         </View>
     );
 }
@@ -53,3 +69,4 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
+export default CreatePage;
