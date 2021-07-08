@@ -31,7 +31,7 @@ export default function Navigationbar({cardItems, setCardItems}) {
                         <Stack.Screen name="Home" component={StartPage}
                                       initialParams={{cardItems: cardItems, setCardItems: setCardItems}}
                                       options={{
-                                          headerShown: false
+                                          headerShown: false,
                                       }
                                       }/>
                         <Stack.Screen name="CardView" component={CardView}/>
