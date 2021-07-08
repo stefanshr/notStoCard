@@ -7,11 +7,10 @@ import Card from "./Card";
 
 
 const Startpage = (props) => {
-
     useEffect(() => {
-        console.clear();
-        console.log(JSON.stringify(cardItems))
-    },[])
+        console.log("inner")
+        console.log(JSON.stringify(props.route.params.cardItems))
+    },[props.route.params.cardItems]);
 
     const cardItems = props.route.params.cardItems;
     const setCardItems = props.route.params.setCardItems;
@@ -22,9 +21,9 @@ const Startpage = (props) => {
         <>
             <HeaderComponent/>
             <FlatList
-                data={cardItems}
+                data={props.route.params.cardItems}
                 numColumns={2}
-                renderItem={({item}) => (<Card item={item} navigation={props.navigation} cardItems={cardItems}/>)}
+                renderItem={({item}) => (<Card item={item} navigation={props.navigation} cardItems={props.route.params.cardItems}/>)}
                 keyExtractor={item => item.id}
             />
         </>

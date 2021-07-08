@@ -7,13 +7,13 @@ const CreatePage = (props) => {
     const [scanned, setScanned] = useState(false);
     // const [cardItems, setCardItems] = useState([]);
 
-
-
-    //
     useEffect(() => {
 
         console.log(JSON.stringify(props.route.params.cardItems))
-    }, [])
+    }, [props.route.params.cardItems])
+
+    //
+
 
     useEffect(() => {
         (async () => {
@@ -30,8 +30,9 @@ const CreatePage = (props) => {
         props.route.params.setCardItems([...props.route.params.cardItems, {
             id: 99,
             name: 'woho',
-            barcode: {data}
+            barcode: data
         }]);
+        console.log(props.route.params.cardItems)
         //
         // setCardItems([...cardItems, {
         //     id: 99,
