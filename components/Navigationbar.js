@@ -6,6 +6,7 @@ import UserPage from "./UserPage";
 import CreatePage from "./CreatePage";
 import {createStackNavigator} from "@react-navigation/stack";
 import CardView from "./CardView";
+import Startpage from "./StartPage";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -19,37 +20,38 @@ export default function Navigationbar(props) {
             barcode: '243324',
             format: 'CODE39'
         },
-        {
-            id: 1,
-            name: 'Coop',
-            barcode: '',
-            format: ''
-        },
-        {
-            id: 2,
-            name: 'Brack',
-            barcode: '',
-            format: ''
-        },
-        {
-            id: 3,
-            name: 'TCS',
-            barcode: '',
-            format: ''
-        },
-        {
-            id: 4,
-            name: 'Digitec',
-            barcode: '',
-            format: ''
-        },
-        {
-            id: 5,
-            name: 'Whatsapp',
-            barcode: '',
-            format: ''
-        },
     ])
+
+    const StartPageComponent = (props) => (
+        <StartPage
+            cardItems={cardItems}
+            setCardItems={setCardItems}
+            navigation={props.navigation}
+        />
+    )
+
+    const StartPageView = (props) => (
+        <Stack.Navigator>
+            <Stack.Screen name="Home" component={StartPageComponent}
+                          initialParams={{cardItems: cardItems, setCardItems: setCardItems}}
+                          options={{
+                              headerShown: false,
+                          }
+                          }/>
+            <Stack.Screen name="CardView" component={CardView}/>
+        </Stack.Navigator>
+    )
+
+    const CreateView = () => (
+        <Stack.Navigator>
+            <Stack.Screen name="Create" component={CreatePage}
+                          initialParams={{cardItems: cardItems, setCardItems: setCardItems}}
+                          options={{
+                              headerShown: false
+                          }
+                          }/>
+        </Stack.Navigator>
+    )
 
 
     useEffect(() => {
@@ -65,17 +67,7 @@ export default function Navigationbar(props) {
                 activeTintColor: '#00ADB5',
                 inactiveTintColor: '#000000',
             }}>
-                <Tab.Screen name="Home" component={() =>
-                    <Stack.Navigator>
-                        <Stack.Screen name="Home" component={StartPage}
-                                      initialParams={{cardItems: cardItems, setCardItems: setCardItems}}
-                                      options={{
-                                          headerShown: false,
-                                      }
-                                      }/>
-                        <Stack.Screen name="CardView" component={CardView}/>
-                    </Stack.Navigator>
-                }
+                <Tab.Screen name="Home" component={StartPageView}
                             options={{
                                 tabBarIcon: ({color, size}) => (
                                     <Ionicons name="ios-home-outline" size={size} color={color}/>
@@ -83,16 +75,7 @@ export default function Navigationbar(props) {
                             }
                             }
                 />
-                <Tab.Screen name="Create" component={() =>
-                    <Stack.Navigator>
-                        <Stack.Screen name="Create" component={CreatePage}
-                                      initialParams={{cardItems: cardItems, setCardItems: setCardItems}}
-                                      options={{
-                                          headerShown: false
-                                      }
-                                      }/>
-                    </Stack.Navigator>
-                }
+                <Tab.Screen name="Create" component={CreateView}
                             options={{
                                 tabBarIcon: ({color, size}) => (
                                     <MaterialIcons name="add-a-photo" size={size} color={color}/>

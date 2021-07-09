@@ -27,7 +27,6 @@ const CreatePage = (props) => {
     }, []);
 
     const handleBarCodeScanned = ({type, data}) => {
-
         setScanned(true);
         Alert.prompt(
             "Enter Companyname",
@@ -63,9 +62,11 @@ const CreatePage = (props) => {
             barcode: data,
             format: type
         }])
-        setScanned(false)
-
     }
+
+    useEffect(() => {
+        console.log(scanned)
+    },[scanned])
 
     useEffect(() => {
         console.log(JSON.stringify(props.route.params.cardItems))
@@ -82,16 +83,16 @@ const CreatePage = (props) => {
         <View style={{
             flex: 1,
             flexDirection: 'column',
-            justifyContent: 'flex-end',
+            justifyContent: 'center',
         }}>
             <BarCodeScanner
                 onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                 style={[StyleSheet.absoluteFillObject, styles.container]}
-            >
-                <Text style={styles.description}>Scan your code</Text>
-                    <View style={styles.outline}/>
-            </BarCodeScanner>
+            />
             {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)}/>}
+            <Text style={styles.description}>Scan your code</Text>
+            <View style={styles.outline}/>
+
         </View>
     );
 }
@@ -118,6 +119,7 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(0,175,255,0.62)',
         borderWidth: 2,
         borderRadius: 15,
+        alignSelf: 'center',
     },
     nonBlurredContent: {
         alignItems: 'center',
