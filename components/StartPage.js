@@ -10,10 +10,11 @@ const Startpage = (props) => {
     useEffect(() => {
         console.log("inner")
         console.log(JSON.stringify(props.route.params.cardItems))
+        console.log("inne2r")
     },[props.route.params.cardItems]);
 
-    const cardItems = props.route.params.cardItems;
-    const setCardItems = props.route.params.setCardItems;
+    // const cardItems = props.route.params.cardItems;
+    // const setCardItems = props.route.params.setCardItems;
 
 
 

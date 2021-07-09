@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, StyleSheet, Button} from 'react-native';
+import {Text, View, StyleSheet, Button, Alert} from 'react-native';
 import {BarCodeScanner} from 'expo-barcode-scanner';
 
 const CreatePage = (props) => {
@@ -7,10 +7,6 @@ const CreatePage = (props) => {
     const [scanned, setScanned] = useState(false);
     // const [cardItems, setCardItems] = useState([]);
 
-    useEffect(() => {
-
-        console.log(JSON.stringify(props.route.params.cardItems))
-    }, [props.route.params.cardItems])
 
     //
 
@@ -25,14 +21,24 @@ const CreatePage = (props) => {
     const handleBarCodeScanned = ({type, data}) => {
 
         setScanned(true);
-        alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+        Alert.prompt(
+            "Enter Companyname",
+            "Please enter the Companyname",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                {
+                    text: "OK",
+                    onPress: name => updateParams({type,data},name)
+                }
+            ],
+            "plain-text"
+        );
 
-        props.route.params.setCardItems([...props.route.params.cardItems, {
-            id: 99,
-            name: 'woho',
-            barcode: data
-        }]);
-        console.log(props.route.params.cardItems)
+
         //
         // setCardItems([...cardItems, {
         //     id: 99,
@@ -40,6 +46,16 @@ const CreatePage = (props) => {
         //     barcode: {data}
         // }]);
     };
+
+    const updateParams = ({type, data}, name) => {
+        props.route.params.setCardItems([...props.route.params.cardItems, {
+            id: props.route.params.cardItems.length,
+            name: name,
+            barcode: data,
+            format: type
+        }])
+        setScanned(false)
+    }
 
     // useEffect(() => {
     //     console.log(JSON.stringify(cardItems))

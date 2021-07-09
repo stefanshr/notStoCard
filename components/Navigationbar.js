@@ -10,13 +10,51 @@ import CardView from "./CardView";
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-export default function Navigationbar({cardItems, setCardItems}) {
+export default function Navigationbar(props) {
+
+    const [cardItems, setCardItems] = useState([
+        {
+            id: 0,
+            name: 'Migos',
+            barcode: '243324',
+            format: 'CODE39'
+        },
+        {
+            id: 1,
+            name: 'Coop',
+            barcode: '',
+            format: ''
+        },
+        {
+            id: 2,
+            name: 'Brack',
+            barcode: '',
+            format: ''
+        },
+        {
+            id: 3,
+            name: 'TCS',
+            barcode: '',
+            format: ''
+        },
+        {
+            id: 4,
+            name: 'Digitec',
+            barcode: '',
+            format: ''
+        },
+        {
+            id: 5,
+            name: 'Whatsapp',
+            barcode: '',
+            format: ''
+        },
+    ])
 
 
     useEffect(() => {
-        console.log("nav")
-        console.log(JSON.stringify(cardItems))
-    }, [cardItems]);
+        console.log(cardItems[cardItems.length-1])
+    },[cardItems, setCardItems])
 
     return (
         <>

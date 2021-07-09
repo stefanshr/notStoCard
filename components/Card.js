@@ -12,7 +12,7 @@ const Card = (props) => {
     });
 
     const navigateTo = () => {
-        props.navigation.navigate('CardView', {name: props.cardItems[props.item.id].name});
+        props.navigation.navigate('CardView', {card: props.cardItems[props.item.id]});
     }
 
     if (!fontsLoaded) {
@@ -23,7 +23,7 @@ const Card = (props) => {
 
         <TouchableOpacity onPress={navigateTo} style={styles.touch}>
             <View>
-                <Text style={styles.card}>{props.cardItems[props.item.id].name.charAt(0)}</Text>
+                <Text style={styles.card}>{props.cardItems[props.item.id].name.charAt(0).toUpperCase()}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -49,6 +49,7 @@ const styles = StyleSheet.create(
             shadowOffset: { height: 5, width: 5 }, // IOS
             shadowOpacity: 1, // IOS
             shadowRadius: 1, //IOS
+
         }
 
 
