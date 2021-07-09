@@ -1,5 +1,4 @@
 import React, {Component, useState} from 'react';
-import {Text} from "react-native";
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
 import Barcode from 'react-native-barcode-svg';

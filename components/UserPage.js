@@ -11,7 +11,7 @@ const UserPage = () => {
     return (
         <View style={styles.container}>
             <View style={styles.header}/>
-            <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
+            <Image style={styles.avatar} source={{uri: 'http://cloud.stefanhohl.ch/s/qne4ZdsHAe7ME7Z/download/dsa.jpg'}}/>
             <View style={styles.body}>
                 <View style={styles.bodyContent}>
                     <Text style={styles.name}>John Doe</Text>
@@ -19,10 +19,7 @@ const UserPage = () => {
                     <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
 
                     <TouchableOpacity style={styles.buttonContainer}>
-                        <Text>Opcion 1</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonContainer}>
-                        <Text>Opcion 2</Text>
+                        <Text>Logoutr</Text>
                     </TouchableOpacity>
                 </View>
             </View>

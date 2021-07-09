@@ -7,11 +7,20 @@ import Card from "./Card";
 
 
 const Startpage = (props) => {
+
+    const [cards, setCards] = useState(props.route.params.cardItems);
+
     useEffect(() => {
-        console.log("inner")
-        console.log(JSON.stringify(props.route.params.cardItems))
-        console.log("inne2r")
+        setCards(props.route.params.cardItems);
     },[props.route.params.cardItems]);
+
+
+    useEffect(() => {
+        console.log("StartPage Output:")
+        console.log(cards)
+    },[cards])
+
+
 
     // const cardItems = props.route.params.cardItems;
     // const setCardItems = props.route.params.setCardItems;
@@ -24,7 +33,7 @@ const Startpage = (props) => {
             <FlatList
                 data={props.route.params.cardItems}
                 numColumns={2}
-                renderItem={({item}) => (<Card item={item} navigation={props.navigation} cardItems={props.route.params.cardItems}/>)}
+                renderItem={({item}) => (<Card item={item} navigation={props.navigation}/>)}
                 keyExtractor={item => item.id}
             />
         </>

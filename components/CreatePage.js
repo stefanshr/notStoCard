@@ -1,6 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import {Text, View, StyleSheet, Button, Alert} from 'react-native';
 import {BarCodeScanner} from 'expo-barcode-scanner';
+import Constants from 'expo-constants';
+import {BlurView} from 'expo-blur';
+import {Dimensions} from 'react-native';
+import * as Haptics from 'expo-haptics';
+
+
+const {width} = Dimensions.get('window');
+
 
 const CreatePage = (props) => {
     const [hasPermission, setHasPermission] = useState(null);
@@ -32,7 +40,7 @@ const CreatePage = (props) => {
                 },
                 {
                     text: "OK",
-                    onPress: name => updateParams({type,data},name)
+                    onPress: name => updateParams({type, data}, name)
                 }
             ],
             "plain-text"
@@ -48,6 +56,7 @@ const CreatePage = (props) => {
     };
 
     const updateParams = ({type, data}, name) => {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
         props.route.params.setCardItems([...props.route.params.cardItems, {
             id: props.route.params.cardItems.length,
             name: name,
@@ -55,11 +64,12 @@ const CreatePage = (props) => {
             format: type
         }])
         setScanned(false)
+
     }
 
-    // useEffect(() => {
-    //     console.log(JSON.stringify(cardItems))
-    // },[cardItems])
+    useEffect(() => {
+        console.log(JSON.stringify(props.route.params.cardItems))
+    },[props.route.params.cardItems])
 
     if (hasPermission === null) {
         return <Text>Requesting for camera permission</Text>;
@@ -69,11 +79,18 @@ const CreatePage = (props) => {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={{
+            flex: 1,
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+        }}>
             <BarCodeScanner
                 onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-                style={StyleSheet.absoluteFillObject}
-            />
+                style={[StyleSheet.absoluteFillObject, styles.container]}
+            >
+                <Text style={styles.description}>Scan your code</Text>
+                    <View style={styles.outline}/>
+            </BarCodeScanner>
             {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)}/>}
         </View>
     );
@@ -82,7 +99,28 @@ const CreatePage = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop: Constants.statusBarHeight,
+        backgroundColor: '#000000',
+        padding: 8,
+    },
+    description: {
+        fontSize: 30,
+        marginTop: '10%',
+        textAlign: 'center',
+        width: '70%',
+        color: 'white',
+    },
+    outline: {
+        width: 325,
+        height: 175,
+        borderColor: 'rgba(0,175,255,0.62)',
+        borderWidth: 2,
+        borderRadius: 15,
+    },
+    nonBlurredContent: {
+        alignItems: 'center',
         justifyContent: 'center',
     },
 });

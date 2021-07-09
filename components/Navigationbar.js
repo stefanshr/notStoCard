@@ -53,7 +53,8 @@ export default function Navigationbar(props) {
 
 
     useEffect(() => {
-        console.log(cardItems[cardItems.length-1])
+        // console.log('Nav')
+        // console.log(cardItems)
     },[cardItems, setCardItems])
 
     return (
