@@ -20,6 +20,18 @@ export default function Navigationbar(props) {
             barcode: '243324',
             format: 'CODE39'
         },
+        {
+            id: 0,
+            name: 'Coop',
+            barcode: '243324',
+            format: 'CODE39'
+        },
+        {
+            id: 0,
+            name: 'Denner',
+            barcode: '243324',
+            format: 'CODE39'
+        },
     ])
 
     const StartPageComponent = (props) => (

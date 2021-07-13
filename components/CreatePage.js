@@ -17,6 +17,10 @@ const CreatePage = (props) => {
 
 
     //
+    useEffect(() => {
+
+    },[props.route.params.cardItems]);
+
 
 
     useEffect(() => {
